@@ -70,6 +70,8 @@
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
     overflow-x: hidden;
+    word-break: keep-all;
+    overflow-wrap: break-word;
   }
 
   a {
@@ -186,7 +188,7 @@
 
   .btn-apply {
     border: 1px solid var(--red-line);
-    color: var(--red-2);
+    color: #fff;
     background: var(--red-soft);
     font-size: 13.5px;
     font-weight: 600;
@@ -542,6 +544,7 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    filter: contrast(1.06) saturate(1.06);
   }
   .instr-photo:has(.p-img) .ph {
     display: none;
@@ -553,7 +556,7 @@
   }
   .instr-tag {
     margin-top: 10px;
-    color: var(--muted);
+    color: #e7e8ea;
     font-size: 16.5px;
     line-height: 1.65;
   }
@@ -590,6 +593,22 @@
     gap: 16px;
     padding-bottom: 20px;
   }
+  /* 이력 항목이 스크롤 진입 시 순서대로 빠르게 나타남 */
+  .instr-card.reveal .ctl-row {
+    opacity: 0;
+    transform: translateY(22px);
+    transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
+  }
+  .instr-card.reveal.in .ctl-row {
+    opacity: 1;
+    transform: none;
+  }
+  .instr-card.reveal .ctl-row:nth-child(1) { transition-delay: 0.08s; }
+  .instr-card.reveal .ctl-row:nth-child(2) { transition-delay: 0.24s; }
+  .instr-card.reveal .ctl-row:nth-child(3) { transition-delay: 0.4s; }
+  .instr-card.reveal .ctl-row:nth-child(4) { transition-delay: 0.56s; }
+  .instr-card.reveal .ctl-row:nth-child(5) { transition-delay: 0.72s; }
+  .instr-card.reveal .ctl-row:nth-child(6) { transition-delay: 0.88s; }
   .ctl-row:last-child {
     padding-bottom: 0;
   }
@@ -734,6 +753,11 @@
     height: 100%;
     object-fit: cover;
     z-index: 2;
+  }
+  /* 현직자 특강(카드 3): 꽉 채우되 왼쪽부터 보이고 오른쪽은 잘림 */
+  .curr-cover.art-3 .cover-img {
+    object-fit: cover;
+    object-position: left center;
   }
   .curr-cover .cover-icon {
     width: 58px;
@@ -1396,10 +1420,44 @@
   }
   .foot-inner {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
-    gap: 20px;
+    gap: 56px;
     flex-wrap: wrap;
+  }
+  .foot-inner .logo img {
+    height: 74px;
+    width: auto;
+  }
+  .foot-meta {
+    text-align: left;
+    line-height: 1.7;
+  }
+  .foot-row1 {
+    font-weight: 700;
+    color: #b0b2b5;
+    font-size: 13.5px;
+  }
+  .foot-logo2 {
+    margin-left: auto;
+  }
+  .foot-logo2 img {
+    height: 32px;
+    width: auto;
+  }
+  .foot-row1 a {
+    color: inherit;
+  }
+  .foot-note {
+    margin-top: 8px;
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--dim);
+  }
+  @media (max-width: 560px) {
+    .foot-meta {
+      text-align: left;
+    }
   }
 
   /* ============================================================
@@ -1534,11 +1592,59 @@
   .tu-embed .flow { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; margin-bottom: 24px; }
   .tu-embed .job-stack { display: flex; flex-direction: column; gap: 12px; flex: 0 0 200px; }
   .tu-embed .job-pill { background: var(--card); border: 1px solid var(--card-line); border-radius: 12px; padding: 20px 22px; font-weight: 600; font-size: 16px; text-align: center; }
+  /* 직군 박스가 스크롤 진입 시 순서대로 하나씩 나타남 */
+  .tu-embed .flow.reveal .job-pill {
+    opacity: 0;
+    transform: translateY(14px);
+    transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+  }
+  .tu-embed .flow.reveal .job-pill:nth-child(2) { transition-delay: 0.15s; }
+  .tu-embed .flow.reveal .job-pill:nth-child(3) { transition-delay: 0.3s; }
+  .tu-embed .flow.reveal.in .job-pill {
+    opacity: 1;
+    transform: none;
+  }
   .tu-embed .flow-mid { flex: 1; display: flex; align-items: center; gap: 16px; min-width: 220px; }
   .tu-embed .arrow { flex: 1; height: 1px; position: relative; min-width: 40px; }
   .tu-embed .arrow::before { content: ""; position: absolute; inset: 0; top: 50%; border-top: 1.5px dashed var(--accent); opacity: 0.7; }
   .tu-embed .arrow.solid::before { border-top-style: dashed; opacity: 0.7; }
-  .tu-embed .arrow.solid::after { content: ""; position: absolute; right: 0; top: 50%; transform: translateY(-50%); border: 5px solid transparent; border-left-color: var(--accent); }
+  .tu-embed .arrow.solid::after { content: ""; position: absolute; right: 1px; top: 50%; width: 8px; height: 8px; border-top: 1.5px solid var(--accent); border-right: 1.5px solid var(--accent); transform: translateY(-50%) rotate(45deg); }
+  /* 화살표가 스크롤 진입 시 왼쪽 → 오른쪽으로 그려짐 (가로 배치일 때만) */
+  @media (min-width: 881px) {
+    .tu-embed .flow.reveal .arrow::before {
+      transform: scaleX(0);
+      transform-origin: left center;
+      transition: transform 0.7s var(--ease);
+    }
+    .tu-embed .flow.reveal .arrow.solid::before {
+      transition-delay: 0.35s;
+    }
+    .tu-embed .flow.reveal.in .arrow::before {
+      transform: scaleX(1);
+    }
+    .tu-embed .flow.reveal .arrow.solid::after {
+      opacity: 0;
+      transition: opacity 0.35s var(--ease) 0.95s;
+    }
+    .tu-embed .flow.reveal.in .arrow.solid::after {
+      opacity: 1;
+    }
+    /* 화살표가 빨갛게 도달하는 순간 카드 테두리·아이콘도 빨강으로 */
+    .tu-embed .flow.reveal .result-card {
+      border-color: var(--card-line);
+      transition: border-color 0.45s var(--ease) 0.95s;
+    }
+    .tu-embed .flow.reveal .result-card .ic {
+      color: var(--text-dim);
+      transition: color 0.45s var(--ease) 0.95s;
+    }
+    .tu-embed .flow.reveal.in .result-card {
+      border-color: var(--accent);
+    }
+    .tu-embed .flow.reveal.in .result-card .ic {
+      color: var(--accent);
+    }
+  }
   .tu-embed .rate { text-align: center; flex: 0 0 auto; }
   .tu-embed .num { width: auto; height: auto; border-radius: 0; background: none; display: block; place-items: normal; color: var(--text); }
   .tu-embed .rate .num { font-size: 34px; font-weight: 800; letter-spacing: 0.05em; line-height: 1.15; white-space: nowrap; }
@@ -1644,7 +1750,7 @@
     .tu-embed .arrow { width: 100%; height: 40px; }
     .tu-embed .arrow::before { top: 0; bottom: 0; left: 50%; border-top: none; border-left: 1.5px dashed var(--accent); width: 0; }
     .tu-embed .arrow.solid::before { border-left-style: dashed; }
-    .tu-embed .arrow.solid::after { right: auto; left: 50%; top: auto; bottom: 0; transform: translateX(-50%); border-color: transparent; border-top-color: var(--accent); }
+    .tu-embed .arrow.solid::after { right: auto; left: 50%; top: auto; bottom: 0; border-top: 0; border-right: 1.5px solid var(--accent); border-bottom: 1.5px solid var(--accent); transform: translateX(-50%) rotate(45deg); }
     .tu-embed .result-card { flex: 1 1 auto; }
     .tu-embed .steps { flex-direction: column; align-items: center; }
     .tu-embed .step-arrow { align-self: center; transform: rotate(90deg); padding: 8px 0; }
@@ -1680,7 +1786,7 @@
   <section class="hero" id="top">
     <div class="wrap hero__grid">
       <div>
-        <span class="eyebrow">kt cloud TECH UP</span>
+        <span class="eyebrow">사용자 경험 · UX 리터치 · 디자인 시스템 · Figma</span>
         <h1>kt cloud TECH UP<br />프로덕트 디자인</h1>
         <p class="hero__sub">문제 해결에서 디자인까지<br />사용자의 여정을 설계하다</p>
         <span class="hero__date">26.6.10 (WED) &nbsp;–&nbsp; 26.12.23 (WED)</span>
@@ -1730,13 +1836,14 @@
       <div class="instr-card reveal">
         <div class="instr-photo">
           <svg class="ph" viewBox="0 0 24 24" fill="currentColor"><path d="M12 12a5 5 0 1 0 0-10 5 5 0 0 0 0 10Zm0 2c-5 0-9 2.5-9 6v2h18v-2c0-3.5-4-6-9-6Z"/></svg>
-          <img class="p-img" src="data:image/webp;base64,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" alt="권진석 강사" />
+          <img class="p-img" src="images/profile.png" alt="권진석 강사" />
         </div>
 
         <div>
           <div class="instr-name">권진석</div>
           <p class="instr-tag">
-            글로벌 테크 기업부터 스타트업 C-Level까지, 실무 리더십과 글로벌 감각을 겸비한 프로덕트 디자인 전문가
+            글로벌 테크 기업부터 스타트업 C-Level까지,<br />
+            실무 리더십과 글로벌 감각을 겸비한 프로덕트 디자인 전문가
           </p>
           <div class="instr-keywords">
             <span class="kw-chip"># 프로덕트 디자인</span>
@@ -2326,7 +2433,7 @@
           </div>
           <div class="pillar">
             <div class="pillar-head">
-              <span class="pillar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 1-5.4 5.4L4 17v3h3l5.3-5.3a4 4 0 0 0 5.4-5.4l-2.3 2.3-2-2 2.3-2.3z"/></svg></span>
+              <span class="pillar-ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"><path d="M3 8a2 2 0 0 1 2-2h13a1 1 0 0 1 1 1v1"/><path d="M3 8v9a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-6a1 1 0 0 0-1-1H5a2 2 0 0 1-2-2Z"/><circle cx="16.5" cy="13" r="1.3"/></svg></span>
               <h3>실무 및 비용 지원</h3>
             </div>
             <p class="pillar-desc">실무 환경과 비용 부담까지 받쳐드립니다.</p>
@@ -2459,7 +2566,7 @@
 
           <div class="faq-col">
             <h3><span class="ic"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M4 19.5V6a2 2 0 0 1 2-2h12v16H6a2 2 0 0 0-2 1.5V19.5Z"/><path d="M8 4v16"/></svg></span>훈련 및 수강</h3>
-            <details class="qa"><summary>훈련과정탐색표를 받을 수 있나요?<span class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="answer"><p>국민취업제도 대상자의 경우 담당 상담사님에게 제출할 훈련탐색표가 필요합니다.</p><p>아래 과정에 맞는 훈련과정탐색표를 다운로드 받아 상담사님에게 전달해주시면 됩니다.</p><ul class="files"><li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>kt cloud 생성형AI 과정_3회차_훈련과정탐색표.hwp</a></li><li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>kt cloud 클라우드 네이티브 과정_3회차_훈련과정탐색표.hwp</a></li><li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>kt cloud 풀스택 과정_3회차_훈련과정탐색표.hwp</a></li><li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>kt cloud 프로덕트 디자인 과정_3회차_훈련과정탐색표.hwp</a></li><li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>kt cloud 프론트엔드 과정_3회차_훈련과정탐색표.hwp</a></li></ul></div></details>
+            <details class="qa"><summary>훈련과정탐색표를 받을 수 있나요?<span class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="answer"><p>국민취업제도 대상자의 경우 담당 상담사님에게 제출할 훈련탐색표가 필요합니다.</p><p>아래 과정에 맞는 훈련과정탐색표를 다운로드 받아 상담사님에게 전달해주시면 됩니다.</p><ul class="files"><li><a href="#"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v11m0 0 4-4m-4 4-4-4M5 17v2a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2v-2"/></svg>kt cloud 프로덕트 디자인 과정_3회차_훈련과정탐색표.hwp</a></li></ul></div></details>
             <details class="qa"><summary>수강에 필요한 준비물이 있나요?<span class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="answer"><p>강의 수강과 프로젝트를 진행할 수 있는 PC(마이크,웹캠 포함) 또는 노트북이 필요합니다.</p></div></details>
             <details class="qa"><summary>권장 노트북 사양이 있을까요?<span class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="answer"><p>Windows10 OS 이상 또는 MacOS | Intel core i5 또는 Apple M1 이상 | 메모리 16GB 이상 | HDD 256GB 이상 권장</p><p>권장 사양 이하일 경우 실습이 원활하지 않을 수 있습니다.</p></div></details>
             <details class="qa"><summary>모바일로도 학습이 가능한가요?<span class="chev"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m6 9 6 6 6-6"/></svg></span></summary><div class="answer"><p>본 과정은 PC로 학습하는 훈련으로, 모바일 학습은 지원되지 않습니다.</p></div></details>
@@ -2482,8 +2589,13 @@
   <!-- ===================== FOOTER ===================== -->
   <footer>
     <div class="wrap foot-inner">
-      <div class="logo"><b>kt cloud</b><span>TECH UP</span></div>
-      <span>© 2026 kt cloud TECH UP · 프로덕트 디자인 과정</span>
+      <div class="logo"><img src="images/foot%20logo_01.png" alt="kt cloud TECH UP" /></div>
+      <div class="foot-meta">
+        <div class="foot-row1"><a href="#">개인정보처리방침</a></div>
+        <div class="foot-row1">고객센터 | 평일 10:30 - 17:00 (휴게 시간 12:00 - 13:30, 주말 및 공휴일 휴무)</div>
+        <div class="foot-note">TECH UP은 kt cloud가 만든 디지털 실무 인재 육성 프로그램 입니다.</div>
+      </div>
+      <div class="foot-logo2"><img src="images/foot%20logo_02.png" alt="kt cloud" /></div>
     </div>
   </footer>
 
@@ -2493,6 +2605,18 @@
     const onScroll = () => nav.classList.toggle("scrolled", window.scrollY > 20);
     onScroll();
     window.addEventListener("scroll", onScroll, { passive: true });
+
+    // ---- '#intro'로 가는 링크(화살표 + 내비 '과정 소개'): 첫 문단까지만 보이게 ----
+    document.querySelectorAll('a[href="#intro"]').forEach((link) => {
+      link.addEventListener("click", (e) => {
+        const p1 = document.querySelector(".intro .p-1");
+        if (!p1) return; // 없으면 기본 #intro 앵커 동작
+        e.preventDefault();
+        const rect = p1.getBoundingClientRect();
+        const target = window.scrollY + rect.bottom - window.innerHeight + 24;
+        window.scrollTo({ top: Math.max(0, target), behavior: "smooth" });
+      });
+    });
 
     // ---- nav active state (scroll spy) ----
     const navLinks = [...document.querySelectorAll(".nav__links a")];
@@ -2504,18 +2628,25 @@
       })
       .filter(Boolean);
 
+    let navLock = false;
+    let navLockTimer = null;
+
+    function setActive(link) {
+      navLinks.forEach((a) => a.classList.remove("active"));
+      if (link) link.classList.add("active");
+    }
+
     function updateActiveNav() {
-      const offset =
-        (parseFloat(
-          getComputedStyle(document.documentElement).getPropertyValue("--nav-h")
-        ) || 72) + 40;
-      let current = null;
-      let bestTop = -Infinity;
+      if (navLock) return; // 클릭 직후에는 고정
+      const vh = window.innerHeight;
+      let best = null;
+      let bestVisible = 0;
       for (const t of spyTargets) {
-        const top = t.el.getBoundingClientRect().top;
-        if (top <= offset && top > bestTop) {
-          bestTop = top;
-          current = t;
+        const r = t.el.getBoundingClientRect();
+        const visible = Math.min(r.bottom, vh) - Math.max(r.top, 0);
+        if (visible > bestVisible) {
+          bestVisible = visible;
+          best = t;
         }
       }
       // near page bottom, force the last target active
@@ -2523,23 +2654,32 @@
         window.innerHeight + window.scrollY >=
         document.body.scrollHeight - 2
       ) {
-        current = spyTargets[spyTargets.length - 1] || current;
+        best = spyTargets[spyTargets.length - 1] || best;
       }
-      navLinks.forEach((a) => a.classList.remove("active"));
-      if (current) current.a.classList.add("active");
+      setActive(best && bestVisible > 0 ? best.a : null);
     }
     window.addEventListener("scroll", updateActiveNav, { passive: true });
     window.addEventListener("resize", updateActiveNav);
     updateActiveNav();
 
+    // 메뉴 클릭 시 즉시 빨간 라인 표시 + 스크롤 애니메이션 동안 고정
+    navLinks.forEach((link) => {
+      link.addEventListener("click", () => {
+        setActive(link);
+        navLock = true;
+        clearTimeout(navLockTimer);
+        navLockTimer = setTimeout(() => {
+          navLock = false;
+          updateActiveNav();
+        }, 800);
+      });
+    });
+
     // ---- reveal on scroll ----
     const io = new IntersectionObserver(
       (entries) => {
         entries.forEach((e) => {
-          if (e.isIntersecting) {
-            e.target.classList.add("in");
-            io.unobserve(e.target);
-          }
+          e.target.classList.toggle("in", e.isIntersecting);
         });
       },
       { threshold: 0, rootMargin: "0px 0px -22% 0px" }
@@ -2683,6 +2823,23 @@
       track.addEventListener("pointerleave", end);
       // prevent click after a drag
       track.addEventListener("click", (e) => { if (moved) e.preventDefault(); }, true);
+    })();
+
+    // ---- 강사 사진 높이를 '이름 ~ 키워드' 블록 높이에 맞춤 ----
+    (function () {
+      const photo = document.querySelector(".instr-photo");
+      const name = document.querySelector(".instr-name");
+      const kw = document.querySelector(".instr-keywords");
+      if (!photo || !name || !kw) return;
+      function sync() {
+        const h =
+          kw.getBoundingClientRect().bottom - name.getBoundingClientRect().top;
+        if (h > 0) photo.style.height = h + "px";
+      }
+      sync();
+      window.addEventListener("resize", sync);
+      window.addEventListener("load", sync);
+      if (document.fonts && document.fonts.ready) document.fonts.ready.then(sync);
     })();
   </script>
 </body>
