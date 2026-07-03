@@ -754,10 +754,12 @@
     object-fit: cover;
     z-index: 2;
   }
-  /* 현직자 특강(카드 3): 꽉 채우되 왼쪽부터 보이고 오른쪽은 잘림 */
+  /* 현직자 특강(카드 3): 남색 발표 화면만 꽉 차게 (오른쪽 참가자 영상 열 잘라냄) */
   .curr-cover.art-3 .cover-img {
     object-fit: cover;
     object-position: left center;
+    transform: scale(1.12);
+    transform-origin: left center;
   }
   .curr-cover .cover-icon {
     width: 58px;
@@ -870,7 +872,8 @@
     display: grid;
     grid-template-columns: 60px 22px 1fr;
     grid-template-rows: 1fr;
-    gap: 14px;
+    column-gap: 8px;
+    row-gap: 14px;
     align-items: start;
     flex: 1;
   }
@@ -878,7 +881,7 @@
     display: flex;
     flex-direction: column;
     padding-top: 13px;
-    text-align: left;
+    text-align: right;
   }
   .tl-time .h {
     font-size: 15px;
@@ -1744,6 +1747,7 @@
     .tu-embed .pillars { grid-template-columns: 1fr; }
     .tu-embed .faq-cols { grid-template-columns: 1fr; }
     .tu-embed .stat-row { flex-direction: column; }
+    .tu-embed .stat { text-align: center; }
     .tu-embed .flow { flex-direction: column; align-items: stretch; }
     .tu-embed .job-stack { flex: 1 1 auto; }
     .tu-embed .flow-mid { flex-direction: column; }
@@ -1821,7 +1825,7 @@
         <span class="em">프로덕트 디자이너를 꿈꾸는 예비 디자이너,<br />
         디자인 시스템을 체계적으로 배우고 싶은 디자이너,<br />
         데이터 분석 및 AI 활용 디자인에 관심 있는 학습자라면</span><br />
-        테크업과 함께 디자이너로서의 다음 단계를 만들어가세요.
+        TECH UP과 함께 디자이너로서의 다음 단계를 만들어가세요.
       </p>
     </div>
   </section>
@@ -1995,7 +1999,7 @@
               <div class="tl-time"><span class="h">9:00</span><span class="s">입실</span></div>
               <div class="tl-spine"><span class="tl-mark filled"></span></div>
               <div class="tl-card">
-                <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span>오전 QR 출석 체크</span>
+                <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20.5 14.5v.01M14.5 20.5v.01M20.5 20.5v.01"/></svg></span>오전 QR 출석 체크</span>
                 <p class="tl-desc">9:00 ~ 9:10 동안 QR 출석 체크 및 입실 체크 합니다.</p>
               </div>
             </div>
@@ -2014,7 +2018,7 @@
               <div class="tl-time"><span class="h">13:00</span><span class="s">~ 14:00</span></div>
               <div class="tl-spine"><span class="tl-mark"></span></div>
               <div class="tl-card">
-                <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 3v7a3 3 0 0 0 6 0V3M7 10v11"/><path d="M17 3c-1.5 1-2 3-2 5s.5 4 2 5v8"/></svg></span>점심 시간</span>
+                <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 2v7c0 1.1.9 2 2 2h1a2 2 0 0 0 2-2V2"/><path d="M7 2v20"/><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7"/></svg></span>점심 시간</span>
               </div>
             </div>
 
@@ -2032,7 +2036,7 @@
               <div class="tl-time"><span class="h">18:00</span><span class="s">퇴실</span></div>
               <div class="tl-spine"><span class="tl-mark"></span></div>
               <div class="tl-card">
-                <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/></svg></span>오후 QR 퇴실 체크</span>
+                <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20.5 14.5v.01M14.5 20.5v.01M20.5 20.5v.01"/></svg></span>오후 QR 퇴실 체크</span>
                 <p class="tl-desc">퇴실 QR 기록까지 완료해야 정상 출석으로 인정됩니다.</p>
               </div>
             </div>
