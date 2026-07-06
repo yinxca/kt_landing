@@ -1014,7 +1014,7 @@
     bottom: -16px;
     width: 2px;
     transform: translateX(-50%);
-    background: rgba(230, 20, 30, 0.28);
+    background: rgba(255, 255, 255, 0.1);
   }
   .tl-row:first-child .tl-spine::before {
     top: 18px;
@@ -1030,14 +1030,15 @@
     width: 15px;
     height: 15px;
     border-radius: 50%;
-    border: 3px solid var(--red);
+    border: 3px solid var(--line-strong);
     background: var(--bg-2);
     transform: translate(-50%, -50%);
     z-index: 1;
   }
   .tl-mark.filled {
+    border-color: var(--red);
     background: var(--red);
-    box-shadow: 0 0 0 4px rgba(230, 20, 30, 0.15);
+    box-shadow: 0 0 0 4px rgba(230, 20, 30, 0.12);
   }
   .tl-card {
     background: var(--card);
@@ -1104,6 +1105,7 @@
     border: 1px solid var(--line);
     border-radius: 16px;
     padding: 20px 22px;
+    cursor: pointer;
     transition: border-color 0.25s var(--ease);
   }
   .rule:hover {
@@ -1116,6 +1118,36 @@
     font-size: 15.5px;
     font-weight: 700;
     color: #fff;
+  }
+  .rule__chevron {
+    margin-left: auto;
+    width: 20px;
+    height: 20px;
+    flex: none;
+    color: var(--muted);
+    display: grid;
+    place-items: center;
+    transition: transform 0.3s var(--ease), color 0.2s var(--ease);
+  }
+  .rule__chevron svg {
+    width: 18px;
+    height: 18px;
+  }
+  .rule.open .rule__chevron {
+    transform: rotate(180deg);
+    color: var(--red-2);
+  }
+  .rule__detail {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.32s var(--ease);
+  }
+  .rule__detail-inner {
+    overflow: hidden;
+    min-height: 0;
+  }
+  .rule.open .rule__detail {
+    grid-template-rows: 1fr;
   }
   .num {
     width: 27px;
@@ -1161,12 +1193,12 @@
     margin-top: 14px;
   }
   .tag {
-    font-size: 12px;
+    font-size: 11px;
     font-weight: 600;
     color: var(--muted);
-    background: var(--red-soft);
-    border: 1px solid var(--red-line);
-    padding: 5px 11px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--line);
+    padding: 4px 10px;
     border-radius: 999px;
   }
 
@@ -2261,32 +2293,40 @@
 
           <div class="rules">
             <div class="rule">
-              <div class="rule__title"><span class="num">1</span>출석 진행 방법 · 수료 기준</div>
-              <p class="rule__desc">매일 QR로 출·퇴실을 기록하며, 전체 교육 기간 내 <b>80% 이상</b> 출석해야 수료가 인정됩니다.</p>
+              <div class="rule__title"><span class="num">1</span>출석 진행 방법 · 수료 기준<span class="rule__chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+              <div class="rule__detail"><div class="rule__detail-inner">
+                <p class="rule__desc">매일 QR로 출·퇴실을 기록하며, 전체 교육 기간 내 <b>80% 이상</b> 출석해야 수료가 인정됩니다.</p>
+              </div></div>
               <div class="tags"><span class="tag">QR 출·퇴실</span><span class="tag">출석률 80% 이상 수료</span></div>
             </div>
 
             <div class="rule">
-              <div class="rule__title"><span class="num">2</span>출석 정정 · 공가 신청</div>
-              <p class="rule__desc">출석 정정 및 질병, 면접 등 부득이한 사유는 증빙 서류와 함께 공가로 인정받을 수 있습니다.</p>
+              <div class="rule__title"><span class="num">2</span>출석 정정 · 공가 신청<span class="rule__chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+              <div class="rule__detail"><div class="rule__detail-inner">
+                <p class="rule__desc">출석 정정 및 질병, 면접 등 부득이한 사유는 증빙 서류와 함께 공가로 인정받을 수 있습니다.</p>
+              </div></div>
               <div class="tags"><span class="tag">공가 인정 사유</span><span class="tag">출석 정정 신청 절차</span></div>
             </div>
 
             <div class="rule">
-              <div class="rule__title"><span class="num">3</span>제적 · 중도 포기</div>
-              <div class="rule__sub">
-                <h4>제적 기준</h4>
-                <p>단위기간 소정훈련일수의 50% 이상 무단 결석한 경우<br />전체 소정훈련일수의 20% 초과 결석한 경우</p>
-                <h4>중도 포기 기준</h4>
-                <p>조기 취업, 그 외 개인 사유로 인해 중도 포기 할 경우, 추후 K-Digital Training 과정에 재참여하실 때 교육비 전액을 본인이 부담해야 합니다.</p>
-              </div>
-              <p class="rule__desc">제적 또는 중도 포기 시, 페널티로 국민내일배움카드 지원 한도액·계좌 잔액이 차감됩니다. (조기 취업 제외)</p>
+              <div class="rule__title"><span class="num">3</span>제적 · 중도 포기<span class="rule__chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+              <div class="rule__detail"><div class="rule__detail-inner">
+                <div class="rule__sub">
+                  <h4>제적 기준</h4>
+                  <p>단위기간 소정훈련일수의 50% 이상 무단 결석한 경우<br />전체 소정훈련일수의 20% 초과 결석한 경우</p>
+                  <h4>중도 포기 기준</h4>
+                  <p>조기 취업, 그 외 개인 사유로 인해 중도 포기 할 경우, 추후 K-Digital Training 과정에 재참여하실 때 교육비 전액을 본인이 부담해야 합니다.</p>
+                </div>
+                <p class="rule__desc">제적 또는 중도 포기 시, 페널티로 국민내일배움카드 지원 한도액·계좌 잔액이 차감됩니다. (조기 취업 제외)</p>
+              </div></div>
               <div class="tags"><span class="tag">제적 · 중도 포기 요건</span><span class="tag">제적 · 중도 포기시 페널티</span></div>
             </div>
 
             <div class="rule">
-              <div class="rule__title"><span class="num">4</span>훈련 장려금</div>
-              <p class="rule__desc">고용형태가 실업 상태에 있는 사람 / 주 15시간 미만 상용근로자 대상으로, 단위기간 출석률 <b>80% 이상</b> 달성 시 단위기간별 훈련장려금과 K-디지털 트레이닝 특별훈련수당을 지원받을 수 있습니다.</p>
+              <div class="rule__title"><span class="num">4</span>훈련 장려금<span class="rule__chevron" aria-hidden="true"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 9l6 6 6-6"/></svg></span></div>
+              <div class="rule__detail"><div class="rule__detail-inner">
+                <p class="rule__desc">고용형태가 실업 상태에 있는 사람 / 주 15시간 미만 상용근로자 대상으로, 단위기간 출석률 <b>80% 이상</b> 달성 시 단위기간별 훈련장려금과 K-디지털 트레이닝 특별훈련수당을 지원받을 수 있습니다.</p>
+              </div></div>
               <div class="tags"><span class="tag">지원 대상</span><span class="tag">장려금 신청 절차</span></div>
             </div>
           </div>
@@ -2933,6 +2973,11 @@
       { threshold: 0, rootMargin: "0px 0px -22% 0px" }
     );
     document.querySelectorAll(".reveal").forEach((el) => io.observe(el));
+
+    // ---- 출석 · 수료 규정: click box to reveal description ----
+    document.querySelectorAll(".rule").forEach((rule) => {
+      rule.addEventListener("click", () => rule.classList.toggle("open"));
+    });
 
     // ---- scroll reveal for 커리어 지원 · FAQ embed (each block rises in) ----
     document.querySelectorAll(".tu-embed .container").forEach((c) => {
