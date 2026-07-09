@@ -1382,6 +1382,21 @@
     color: rgba(255, 255, 255, 0.72);
     line-height: 1.7;
   }
+  .rec-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 7px;
+    margin-top: 16px;
+  }
+  .rec-tag {
+    font-size: 11.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.82);
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.14);
+    padding: 4px 10px;
+    border-radius: 999px;
+  }
   /* fan positions set via [data-pos] */
   .rec-card[data-pos="0"] {
     transform: translate(0, 0) scale(1);
@@ -2254,7 +2269,7 @@
               <div class="tl-spine"><span class="tl-mark"></span></div>
               <div class="tl-card">
                 <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="15" height="10" rx="2"/><path d="m17 10 5-3v10l-5-3z"/></svg></span>실시간 강의 · 프로젝트 작업</span>
-                <p class="tl-desc">실시간 강의와 프로젝트 작업을 중심으로, 피드백과 멘토링 등<br />다양한 학습이 진행됩니다.<span class="tl-caution">※ 원활한 참여를 위해 반드시 실시간 접속 및 카메라 ON 상태를 유지해야 합니다.</span></p>
+                <p class="tl-desc">실시간 강의와 프로젝트 작업을 중심으로, 피드백과 멘토링 등<br />다양한 프로그램이 진행됩니다.<span class="tl-caution">※ 원활한 참여를 위해 반드시 실시간 접속 및 카메라 ON 상태를<br />유지해야 합니다.</span></p>
               </div>
             </div>
 
@@ -2273,7 +2288,7 @@
               <div class="tl-spine"><span class="tl-mark"></span></div>
               <div class="tl-card">
                 <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="7" width="15" height="10" rx="2"/><path d="m17 10 5-3v10l-5-3z"/></svg></span>실시간 강의 · 프로젝트 작업</span>
-                <p class="tl-desc">실시간 강의와 프로젝트 작업을 중심으로, 피드백과 멘토링 등<br />다양한 학습이 진행됩니다.<span class="tl-caution">※ 원활한 참여를 위해 반드시 실시간 접속 및 카메라 ON 상태를 유지해야 합니다.</span></p>
+                <p class="tl-desc">실시간 강의와 프로젝트 작업을 중심으로, 피드백과 멘토링 등<br />다양한 프로그램이 진행됩니다.<span class="tl-caution">※ 원활한 참여를 위해 반드시 실시간 접속 및 카메라 ON 상태를<br />유지해야 합니다.</span></p>
               </div>
             </div>
 
@@ -2377,6 +2392,7 @@
           <div class="rec-body">
             <h4>클라우드 웹 서버 배포 자동화</h4>
             <p>KT Cloud 인스턴스 위에 Nginx 웹 서버를 올리고, 스크립트로 환경 설정과 배포를 자동화한 입문 프로젝트입니다. 클라우드 자원 생성부터 서비스 오픈까지의 기본 흐름을 익혔습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#Nginx</span><span class="rec-tag">#배포 자동화</span><span class="rec-tag">#클라우드 인프라</span></div>
           </div>
         </article>
 
@@ -2389,6 +2405,7 @@
           <div class="rec-body">
             <h4>사내 파일 공유 스토리지 서비스</h4>
             <p>오브젝트 스토리지를 활용해 팀 단위로 파일을 업로드·다운로드하는 사내 공유 서비스를 구현했습니다. 버킷 구성과 접근 권한 관리의 기본기를 다졌습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#오브젝트 스토리지</span><span class="rec-tag">#권한 관리</span><span class="rec-tag">#파일 공유</span></div>
           </div>
         </article>
 
@@ -2401,6 +2418,7 @@
           <div class="rec-body">
             <h4>정적 웹사이트 CDN 배포</h4>
             <p>정적 웹사이트를 오브젝트 스토리지에 올리고 CDN을 연결해 어디서나 빠르게 접속되도록 구성했습니다. 캐시 정책과 배포 흐름의 기본기를 익혔습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#CDN</span><span class="rec-tag">#오브젝트 스토리지</span><span class="rec-tag">#캐시 정책</span></div>
           </div>
         </article>
 
@@ -2414,6 +2432,7 @@
           <div class="rec-body">
             <h4>쿠버네티스 기반 마이크로서비스</h4>
             <p>단일 애플리케이션을 여러 서비스로 분리하고 쿠버네티스로 컨테이너를 오케스트레이션했습니다. 오토스케일링과 무중단 배포까지 직접 설계·구성했습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#Kubernetes</span><span class="rec-tag">#마이크로서비스</span><span class="rec-tag">#무중단 배포</span></div>
           </div>
         </article>
 
@@ -2426,6 +2445,7 @@
           <div class="rec-body">
             <h4>실시간 서비스 모니터링 대시보드</h4>
             <p>Prometheus·Grafana를 연동해 서버 상태와 트래픽을 실시간으로 시각화했습니다. 임계치 기반 알림으로 장애를 조기에 감지하는 체계를 만들었습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#Prometheus</span><span class="rec-tag">#Grafana</span><span class="rec-tag">#실시간 모니터링</span></div>
           </div>
         </article>
 
@@ -2438,6 +2458,7 @@
           <div class="rec-body">
             <h4>메시지 큐 기반 비동기 처리</h4>
             <p>대량 요청을 메시지 큐로 분산 처리해 서비스 부하를 안정적으로 흡수하는 구조를 설계했습니다. 재시도·실패 처리까지 고려한 신뢰성 있는 파이프라인을 구현했습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#메시지 큐</span><span class="rec-tag">#비동기 처리</span><span class="rec-tag">#신뢰성 설계</span></div>
           </div>
         </article>
 
@@ -2451,6 +2472,7 @@
           <div class="rec-body">
             <h4>AI 상담 챗봇 ‘CloudMate’</h4>
             <p>무박 2일 해커톤에서 LLM 기반 고객 상담 챗봇을 완성했습니다. 문의 유형 자동 분류와 답변 추천 기능을 구현해 우수상을 수상했습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#LLM</span><span class="rec-tag">#AI 챗봇</span><span class="rec-tag">#우수상 수상</span></div>
           </div>
         </article>
 
@@ -2463,6 +2485,7 @@
           <div class="rec-body">
             <h4>탄소배출 시각화 플랫폼 ‘GreenTrack’</h4>
             <p>기업의 클라우드 사용량을 탄소배출량으로 환산해 보여주는 ESG 서비스를 팀 프로젝트로 개발했습니다. 데이터 수집부터 대시보드까지 하루 만에 구현했습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#ESG</span><span class="rec-tag">#데이터 시각화</span><span class="rec-tag">#대시보드</span></div>
           </div>
         </article>
 
@@ -2475,6 +2498,7 @@
           <div class="rec-body">
             <h4>실시간 협업 화이트보드 ‘BoardUp’</h4>
             <p>무박 2일 해커톤에서 여러 사용자가 동시에 편집하는 실시간 협업 화이트보드를 완성했습니다. 웹소켓 기반 동기화로 지연 없는 공동 작업 경험을 구현했습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#WebSocket</span><span class="rec-tag">#실시간 협업</span><span class="rec-tag">#동기화</span></div>
           </div>
         </article>
 
@@ -2488,6 +2512,7 @@
           <div class="rec-body">
             <h4>멀티 클라우드 통합 관제 시스템</h4>
             <p>여러 클라우드 환경의 자원을 한 화면에서 관리·모니터링하는 실무형 통합 관제 시스템을 구축했습니다. 기획·개발·발표까지 현업 프로세스를 그대로 경험했습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#멀티 클라우드</span><span class="rec-tag">#통합 관제</span><span class="rec-tag">#실무 프로세스</span></div>
           </div>
         </article>
 
@@ -2500,6 +2525,7 @@
           <div class="rec-body">
             <h4>DevOps 파이프라인 구축 프로젝트</h4>
             <p>코드 커밋부터 빌드·테스트·배포까지 이어지는 CI/CD 파이프라인을 실무 시나리오에 맞춰 구축했습니다. 자동화된 배포 흐름으로 릴리스 주기를 크게 단축했습니다.</p>
+            <div class="rec-tags"><span class="rec-tag">#CI/CD</span><span class="rec-tag">#DevOps</span><span class="rec-tag">#배포 자동화</span></div>
           </div>
         </article>
       </div>
@@ -2925,14 +2951,17 @@
       })
       .filter(Boolean);
 
-    // nav에는 없지만 커리큘럼의 일부인 섹션(#schedule)도 커리큘럼 링크를 활성화하도록 묶기
-    const curriculumLink = navLinks.find(
-      (a) => a.getAttribute("href") === "#curriculum"
-    );
-    const scheduleEl = document.querySelector("#schedule");
-    if (curriculumLink && scheduleEl) {
-      spyTargets.push({ a: curriculumLink, el: scheduleEl });
-    }
+    // nav에는 없지만 특정 링크에 묶어야 하는 섹션들 (해당 섹션에 있을 때 지정 링크를 활성화)
+    const extraSpyMap = [
+      { link: "#curriculum", section: "#schedule" }, // 성장을 위한 9시간의 루틴 = 커리큘럼의 일부
+      { link: "#career", section: "#results" }, // 취업 성과 = 커리어 지원의 일부
+      { link: "#career", section: "#support" }, // 지원 혜택 = 커리어 지원의 일부
+    ];
+    extraSpyMap.forEach(({ link, section }) => {
+      const a = navLinks.find((x) => x.getAttribute("href") === link);
+      const el = document.querySelector(section);
+      if (a && el) spyTargets.push({ a, el });
+    });
 
     let navLock = false;
     let navLockTimer = null;
