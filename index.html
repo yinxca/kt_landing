@@ -1996,7 +1996,7 @@
       <p class="p-2 reveal">
         <span class="em">프로덕트 디자이너라는 꿈 앞에서 망설이고 있다면,<br />
         디자인 시스템을 체계적으로 배우고 싶다면,<br />
-        데이터와 AI로 더 나은 경험을 만들고 싶다면</span><br />
+        데이터와 AI를 활용해 더 나은 서비스를 만들고 싶다면</span><br />
         TECH UP에서, 어제보다 성장한 나를 만나보세요.
       </p>
     </div>
@@ -2085,7 +2085,7 @@
   <section class="curriculum section-pad" id="curriculum">
     <div class="wrap">
       <div class="head reveal">
-        <h2>오늘의 시작이, 내일의 실력이 되도록<br /><span style="color: var(--red-2);">7개월 동안 단계별로 성장하는 커리큘럼</span></h2>
+        <h2>오늘의 시작이, 내일의 실력이 되도록<br /><span style="color: var(--red-2);">단계별로 성장하는 커리큘럼</span></h2>
         <div class="head-center-btn">
           <a href="#" class="dl-btn">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3v12"/><path d="m7 10 5 5 5-5"/><path d="M5 21h14"/></svg>
@@ -2273,7 +2273,7 @@
               <div class="tl-spine"><span class="tl-mark"></span></div>
               <div class="tl-card">
                 <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><path d="M14 14h3v3h-3z"/><path d="M20.5 14.5v.01M14.5 20.5v.01M20.5 20.5v.01"/></svg></span>오후 QR 퇴실 체크</span>
-                <p class="tl-desc">퇴실 QR 기록까지 완료해야 정상 출석으로 인정됩니다.</p>
+                <p class="tl-desc">17:50 ~ 18:10 안에 퇴실 QR 기록까지 완료해야 정상 출석으로 인정됩니다.</p>
               </div>
             </div>
 
@@ -2915,6 +2915,15 @@
         return el ? { a, el } : null;
       })
       .filter(Boolean);
+
+    // nav에는 없지만 커리큘럼의 일부인 섹션(#schedule)도 커리큘럼 링크를 활성화하도록 묶기
+    const curriculumLink = navLinks.find(
+      (a) => a.getAttribute("href") === "#curriculum"
+    );
+    const scheduleEl = document.querySelector("#schedule");
+    if (curriculumLink && scheduleEl) {
+      spyTargets.push({ a: curriculumLink, el: scheduleEl });
+    }
 
     let navLock = false;
     let navLockTimer = null;
