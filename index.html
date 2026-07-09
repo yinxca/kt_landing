@@ -1034,6 +1034,8 @@
     background: var(--bg-2);
     transform: translate(-50%, -50%);
     z-index: 1;
+    transition: border-color 0.25s var(--ease), background 0.25s var(--ease),
+      box-shadow 0.25s var(--ease);
   }
   .tl-mark.filled {
     border-color: var(--red);
@@ -2304,7 +2306,7 @@
 
             <div class="tl-row">
               <div class="tl-time"><span class="h">18:00 ~</span></div>
-              <div class="tl-spine"><span class="tl-mark filled"></span></div>
+              <div class="tl-spine"><span class="tl-mark"></span></div>
               <div class="tl-card">
                 <span class="tl-chip"><span class="mini-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 11l3 3 8-8"/><path d="M20 12v6a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h9"/></svg></span>데일리 체크 설문</span>
                 <p class="tl-desc">그날 학습 경험과 이해도, 어려움을 간단히 기록합니다.</p>
@@ -3026,6 +3028,26 @@
     document.querySelectorAll(".rule").forEach((rule) => {
       rule.addEventListener("click", () => rule.classList.toggle("open"));
     });
+
+    // ---- 시간표 타임라인: hover 시 빨간 마커 이동 (기본 9:00) ----
+    const tlTimeline = document.querySelector(".timeline");
+    if (tlTimeline) {
+      const tlRows = [...tlTimeline.querySelectorAll(".tl-row")];
+      const firstRow = tlRows[0];
+      const setTlMark = (activeRow) => {
+        tlRows.forEach((row) => {
+          const m = row.querySelector(".tl-mark");
+          if (m) m.classList.toggle("filled", row === activeRow);
+        });
+      };
+      tlRows.forEach((row) => {
+        row.addEventListener("mouseenter", () => {
+          // 마커가 있는 행이면 그 행으로, 없으면(18:00~) 기본 9:00으로
+          setTlMark(row.querySelector(".tl-mark") ? row : firstRow);
+        });
+      });
+      tlTimeline.addEventListener("mouseleave", () => setTlMark(firstRow));
+    }
 
     // ---- scroll reveal for 커리어 지원 · FAQ embed (each block rises in) ----
     document.querySelectorAll(".tu-embed .container").forEach((c) => {
